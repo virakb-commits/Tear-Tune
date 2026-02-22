@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tear-Tune | Premium Moods</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <div class="sidebar" id="sidebar">
+        <button onclick="toggleSidebar()"><i class="fa fa-times"></i></button>
+        <h2>Tear-Tune</h2>
+        <ul>
+            <li style=" color: #b3b3b3; "><i class="fa fa-home"></i> Home</li>
+            <li onclick="Playlist()" style=" color: #b3b3b3; "><i class="fa fa-list"></i> Playlist</li>
+            <li onclick="logout()" style="color: #ff4d4d; margin-top: 40px;">Logout</li>
+        </ul>
+    </div>
+
+    <div class="main">
+        <header class="header">
+            <button onclick="toggleSidebar()"><i class="fa fa-bars"></i></button>
+            <div class="search-container">
+                <input type="text" id="searchInput" oninput="searchSongs()" placeholder="Search your vibe...">
+            </div>
+        </header>
+
+        <section style="padding: 40px;">
+            <h1 id="welcomeHeader" style="font-size: 40px; margin-bottom: 10px;">Deepest Tracks</h1>
+            <p style="color: #b3b3b3; margin-bottom: 30px;">Curated sad music for your lonely nights.</p>
+            <div id="song-container" class="song-list"></div>
+        </section>
+    </div>
+
+    <div class="player">
+        <div style="display: flex; align-items: center; width: 30%;">
+            <img id="currentAlbumArt" src="picture/Untitled-1.jpg" style="width: 65px; height: 65px;">
+            <div style="margin-left: 20px;">
+                <h4 id="nowPlayingTitle">Select Song</h4>
+                <p id="nowPlayingArtist" style="font-size: 13px; color: #b3b3b3;">Artist</p>
+            </div>
+        </div>
+        <div style="width: 40%; text-align: center;">
+            <div style="margin-bottom: 10px; display: flex; justify-content: center; gap: 20px;">
+                <button onclick="prevSong()" style="background:none; border:none; color:white; font-size:22px;"><i class="fa-solid fa-backward-step"></i></button>
+                <button class="play-btn" id="masterPlay" onclick="togglePlay()"><i class="fa fa-play"></i></i></button>
+                <button onclick="nextSong()" style="background:none; border:none; color:white; font-size:22px;"><i class="fa-solid fa-forward-step"></i></button>
+            </div>
+            <input type="range" id="progressBar" value="0">
+        </div>
+        <div class="volume-control">
+            <span><i class="fa fa-volume-up"></i></span>
+            <input type="range" id="volumeControl" min="0" max="1" step="0.05" value="1" style="width: 100px;">
+        </div>
+    </div>
+
+    <audio id="audioPlayer"></audio>
+    <script src="index.js"></script>
+    <script>
+        const user = localStorage.getItem("username");
+        if (!user) window.location.href = "login.html";
+        else document.getElementById('welcomeHeader').innerText = "Welcome back, " + user;
+    </script>
+</body>
+</html>
